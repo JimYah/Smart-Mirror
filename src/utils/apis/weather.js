@@ -7,7 +7,7 @@ export async function getWeather (latitude, longitude) {
 }
 
 export async function getLocation () {
-  const res = await fetch('https://geoip-db.com/json/')
-  const result = await res.json()
-  return result
+  const res = await fetch('http://ip-api.com/json')
+  const { lat, lon } = await res.json()
+  return { latitude: lat, longitude: lon }
 }
