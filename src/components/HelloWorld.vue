@@ -5,16 +5,48 @@
 </template>
 
 <script>
+import { getWeather, getLocation } from '@/utils/apis/weather'
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      weatherData: null
+    }
+  },
+
+  computed: {
+    country () {
+      return this.weatherData.location.country
+    },
+    city () {
+      return this.weatherData.location.city
+    },
+    currentCondition () {
+      return this.weatherData.item.condition
+    },
+    currentTemp () {
+      return this.currentCondition.temp
+    },
+    currentWeatherText () {
+      return this.currentCondition.text
+    },
+    weatherForecast () {
+      return this.weatherData.item.forecast
+    }
+
+  },
+
+  filters: {
+    c (f) {
+      const temp = (f - 32) * 5 / 9
+      return `${temp}℃`
     }
   },
 
   mounted () {
     this.speakInit()
+    this.fetchWeatherData()
   },
 
   methods: {
@@ -37,6 +69,11 @@ export default {
       const last = e.results.length - 1
       const msg = e.results[last][0].transcript
       console.log(msg)
+    },
+    async fetchWeatherData () {
+      const { latitude, longitude } = await getLocation()
+      const weatherData = await getWeather(latitude, longitude)
+      this.weatherData = weatherData
     }
   }
 
