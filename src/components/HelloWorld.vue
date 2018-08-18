@@ -25,20 +25,21 @@ export default {
       recognition.lang = 'zh-TW'
       recognition.interimResults = false
 
-      recognition.addEventListener('result', (e) => {
-        let last = e.results.length - 1
-        let text = e.results[last][0].transcript
-
-        console.log(text)
-      })
+      recognition.addEventListener('result', this.handleGetMsg)
 
       recognition.addEventListener('end', () => {
         recognition.start()
       })
 
       recognition.start()
+    },
+    handleGetMsg (e) {
+      const last = e.results.length - 1
+      const msg = e.results[last][0].transcript
+      console.log(msg)
     }
   }
+
 }
 </script>
 
