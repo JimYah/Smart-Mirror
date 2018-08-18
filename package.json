@@ -14,6 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "dayspan-vuetify": "^0.2.5",
     "reset-css": "^4.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
