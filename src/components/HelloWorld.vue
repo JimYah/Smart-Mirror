@@ -38,11 +38,13 @@
       </li>
     </ul>
   </div>
+  <TodoList></TodoList>
 </div>
 </template>
 
 <script>
 import { getWeather, getLocation } from '@/utils/apis/weather'
+import TodoList from './TodoList'
 
 export default {
   name: 'HelloWorld',
@@ -59,7 +61,9 @@ export default {
       }
     }
   },
-
+  components: {
+    TodoList
+  },
   computed: {
     maxTemp () {
       let temp = this.weatherForecast.map(temps => Number(temps.high))
